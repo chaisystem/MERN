@@ -8,6 +8,7 @@ app.set('port', process.env.PORT || 3000); // se define el puerto por default o 
 
 // Middlewares
 app.use(morgan('dev'));
+app.use(express.json()); // comprueba si el dato es un formato json
 
 
 // Routes
