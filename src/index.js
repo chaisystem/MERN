@@ -1,5 +1,7 @@
 const express = require('express'); // obtengo express
 const morgan = require('morgan'); // obtengo morgan
+const path = require('path'); // obtengo path
+
 const app = express(); // lo guardo en un objeto
 
 
@@ -15,6 +17,10 @@ app.use(express.json()); // comprueba si el dato es un formato json
 app.use('/api/tasks' ,require('./routes/task.routes'));
 
 // Static files
+// console.log('DIRNAME ',__dirname + '/public'); normalmente
+console.log(path.join(__dirname, 'public')); // sin problemas de win o mac \ o /
+const dir = path.join(__dirname, 'public')
+app.use(express.static(dir));
 
 
 // Start servidor
