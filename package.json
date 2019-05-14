@@ -1,0 +1,20 @@
+{
+  "name": "mern-stack-tasks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaisystem/MERN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chaisystem/MERN/issues"
+  },
+  "homepage": "https://github.com/chaisystem/MERN#readme"
+}
