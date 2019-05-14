@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/chaisystem/MERN/issues"
   },
-  "homepage": "https://github.com/chaisystem/MERN#readme"
+  "homepage": "https://github.com/chaisystem/MERN#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
