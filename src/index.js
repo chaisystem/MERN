@@ -12,6 +12,7 @@ app.use(express.json()); // comprueba si el dato es un formato json
 
 
 // Routes
+app.use(require('./routes/task.routes'));
 
 // Static files
 
