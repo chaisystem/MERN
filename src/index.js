@@ -1,4 +1,5 @@
 const express = require('express'); // obtengo express
+const morgan = require('morgan'); // obtengo morgan
 const app = express(); // lo guardo en un objeto
 
 
@@ -6,6 +7,7 @@ const app = express(); // lo guardo en un objeto
 app.set('port', process.env.PORT || 3000); // se define el puerto por default o 3000
 
 // Middlewares
+app.use(morgan('dev'));
 
 
 // Routes
