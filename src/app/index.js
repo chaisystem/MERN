@@ -1,9 +1,6 @@
-// alert('alert desde indexjs , aqui a react');
-
-import React, { Component } from 'react'; // 
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-// SINTAXIS JSX
 class App extends Comment{
     render(){
         return (
@@ -11,6 +8,5 @@ class App extends Comment{
         )
     }
 }
-// SINTAXIS JSX FIN
 
-render(<App/>, document.getElementById('app'))
+render(<App/>, document.getElementById('app'));
