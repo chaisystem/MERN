@@ -2,7 +2,7 @@ const express = require('express'); // obtengo express
 const morgan = require('morgan'); // obtengo morgan
 const path = require('path'); // obtengo path
 
-const { mongoose } = require('./database'); // requerimos desde database
+const { mongoose } = require('./database'); // requerimos desde database solo el modulo mongoose
 
 const app = express(); // lo guardo en un objeto
 
