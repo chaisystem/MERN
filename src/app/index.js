@@ -1,0 +1,1 @@
+// alert('alert desde indexjs , aqui a react');
