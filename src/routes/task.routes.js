@@ -13,6 +13,7 @@ const Task =require('../models/task');
 // });  // manera normal
 
 /// new manera await
+
 router.get('/', async (req, res) =>{
     const tasks = await Task.find();
     res.json(tasks);
@@ -31,6 +32,11 @@ router.put('/:id', async (req, res) =>{
     await Task.findByIdAndUpdate(req.params.id, newTask); // obtenemos el id y segundo paramentro los datos ... await esperamos que termine
     console.log(req.params.id);
     res.json('task updated');
+});
+
+router.delete('/:id', async (req, res) =>{
+    await Task.findByIdAndDelete(req.params.id); 
+    res.json('task deleted');
 });
 
 
