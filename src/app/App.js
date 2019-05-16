@@ -24,7 +24,8 @@ class App extends Component{
                 'Content-Type': 'application/json'
             }            
         }) 
-            .then(res => console.log(res))
+            .then(res => res.json())
+            .then(data => console.log(data))
             .catch(err => console.log(err));  // then promesa
 
         e.preventDefault();
