@@ -1,12 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
-class App extends Comment{
-    render(){
-        return (
-            <h1>chaisystem</h1>
-        )
-    }
-}
+import App from './App';
 
 render(<App/>, document.getElementById('app'));
