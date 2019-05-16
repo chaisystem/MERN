@@ -25,7 +25,11 @@ class App extends Component{
             }            
         }) 
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                M.toast({html: 'Task Saved'}); // muestra notificacion
+                this.setState({title:'',description:''}); // limpia campos
+
+            })
             .catch(err => console.log(err));  // then promesa
 
         e.preventDefault();
@@ -59,12 +63,12 @@ class App extends Component{
                   <form onSubmit={this.addTask}>
                     <div className="row">
                       <div className="input-field col s12">
-                        <input name="title" onChange={this.handleChange} placeholder="Task Title" autoFocus/>
+                        <input name="title" onChange={this.handleChange} placeholder="Task Title" value={this.state.title} autoFocus/>
                       </div>
                     </div>
                     <div className="row">
                       <div className="input-field col s12">
-                        <textarea name="description" onChange={this.handleChange} cols="30" rows="10" placeholder="Task Description" className="materialize-textarea"></textarea>
+                        <textarea name="description" onChange={this.handleChange} cols="30" rows="10" placeholder="Task Description" value={this.state.description} className="materialize-textarea"></textarea>
                       </div>
                     </div>
                     <button type="submit" className="btn light-blue darken-4">Send </button>
