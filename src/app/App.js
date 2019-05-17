@@ -7,7 +7,8 @@ class App extends Component{
         super();
         this.state = {
             title: '',
-            description: ''
+            description: '',
+            tasks:[]
         };
         this.addTask = this.addTask.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -27,6 +28,7 @@ class App extends Component{
             .then(res => res.json())
             .then(data => {
                 M.toast({html: 'Task Saved'}); // muestra notificacion
+                this.fetchTasks();
                 this.setState({title:'',description:''}); // limpia campos
 
             })
@@ -44,7 +46,11 @@ class App extends Component{
         // fetch por default hace una peticion get por lo tanto no es necesario headers ...
         fetch('/api/tasks')
             .then(res => res.json())
-            .then(data => console.log(data))          
+            .then(data => {
+                //console.log(data)
+                this.setState({tasks: data});
+                console.log(this.state.tasks);
+            })          
     }
     handleChange(e){
         // console.log(e.target.name);
@@ -86,6 +92,27 @@ class App extends Component{
                   </form>
                 </div>
               </div>
+            </div>
+
+            <div className="col s7">
+                <table>
+                    <thead>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.tasks.map(task => {
+                                return (
+                                    <tr>
+                                        <td>{task.title}</td>
+                                        <td>{task.description}</td>
+                                    </tr>
+                                )
+                            })
+                        }                       
+                    </tbody>
+                </table>
             </div>
 
           
