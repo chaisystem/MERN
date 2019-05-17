@@ -35,6 +35,17 @@ class App extends Component{
         e.preventDefault();
     }
 
+    componentDidMount() {
+        console.log('like docuemnt ready in jq');
+        this.fetchTasks();
+    }
+
+    fetchTasks(){
+        // fetch por default hace una peticion get por lo tanto no es necesario headers ...
+        fetch('/api/tasks')
+            .then(res => res.json())
+            .then(data => console.log(data))          
+    }
     handleChange(e){
         // console.log(e.target.name);
         const {name, value} = e.target;
