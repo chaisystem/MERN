@@ -37,7 +37,21 @@ class App extends Component{
         e.preventDefault();
     }
     deleteTask(id){
-        alert(id);
+        if(confirm('Are you sure you want delete it?')){
+            fetch(`/api/tasks/${id}`, { // new forma - interpolacion
+                method: 'DELETE',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                }
+            })
+            .then(res => res.json()) 
+            .then(data => {
+                console.log(data);
+                M.toast({html: 'Task Deleted'}); // muestra notificacion)
+                this.fetchTasks();
+                });
+        }        
     }
 
     componentDidMount() {
