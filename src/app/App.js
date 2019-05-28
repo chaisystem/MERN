@@ -8,32 +8,51 @@ class App extends Component{
         this.state = {
             title: '',
             description: '',
-            tasks:[]
+            tasks:[],
+            _id:''
         };
         this.addTask = this.addTask.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }   
 
     addTask(e){
-        console.log(this.state);
-        // para enviar datos al servidor
-        fetch('/api/tasks', {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers:{
-                'Accept': 'application/josn',
-                'Content-Type': 'application/json'
-            }            
-        }) 
-            .then(res => res.json())
-            .then(data => {
-                M.toast({html: 'Task Saved'}); // muestra notificacion
-                this.fetchTasks();
-                this.setState({title:'',description:''}); // limpia campos
+        if(this.state._id){ // edit
+            fetch(`/api/tasks/${this.state._id}`, {
+                method: 'PUT',
+                body: JSON.stringify(this.state),
+                headers:{
+                    'Accept': 'application/josn',
+                    'Content-Type': 'application/json'
+                } 
 
             })
-            .catch(err => console.log(err));  // then promesa
+            .then(res=>res.json())
+            .then(data=> {
+                console.log(data)
+                M.toast({html: 'Task Edited'}); // muestra notificacion
+                this.fetchTasks();
+            });
+        }else{ // save
+            console.log(this.state);
+            // para enviar datos al servidor
+            fetch('/api/tasks', {
+                method: 'POST',
+                body: JSON.stringify(this.state),
+                headers:{
+                    'Accept': 'application/josn',
+                    'Content-Type': 'application/json'
+                }            
+            }) 
+                .then(res => res.json())
+                .then(data => {
+                    M.toast({html: 'Task Saved'}); // muestra notificacion
+                    this.fetchTasks();
+                    this.setState({title:'',description:''}); // limpia campos
 
+                })
+                .catch(err => console.log(err));  // then promesa
+            }
+        
         e.preventDefault();
     }
     deleteTask(id){
@@ -52,6 +71,18 @@ class App extends Component{
                 this.fetchTasks();
                 });
         }        
+    }
+    editTask(id){
+        fetch(`/api/tasks/${id}`) 
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    title:data.title,
+                    description:data.description,
+                    _id:data._id
+                });
+            })
     }
 
     componentDidMount() {
@@ -105,7 +136,7 @@ class App extends Component{
                         <textarea name="description" onChange={this.handleChange} cols="30" rows="10" placeholder="Task Description" value={this.state.description} className="materialize-textarea"></textarea>
                       </div>
                     </div>
-                    <button type="submit" className="btn light-blue darken-4">Send </button>
+                    <button type="submit" className="btn light-blue darken-4">Send</button>
                   </form>
                 </div>
               </div>
@@ -128,7 +159,9 @@ class App extends Component{
                                         <td>{task.title}</td>
                                         <td>{task.description}</td>
                                         <td>
-                                            <button className="btn light-blue darken-4">
+                                            <button className="btn light-blue darken-4" onClick={() => {
+                                                this.editTask(task._id)
+                                            }}>
                                                 <i className="material-icons">edit</i>
                                             </button> 
                                             <button className="btn light-blue darken-4" style={{margin:'4px'}} onClick={ () => {
